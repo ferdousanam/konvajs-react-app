@@ -23,18 +23,23 @@ function App() {
     }
 
     return (
-        <div>
-            <Stage ref={stageRef} width={width} height={height} style={{
-                width: width,
-                height: height,
-                border: '1px dashed #333'
-            }}>
-                <Layer>
-                    <ColoredRect/>
-                    <ImageCanvas/>
-                </Layer>
-            </Stage>
-            <button onClick={handleExport}>Download</button>
+        <div className="flex items-center justify-center h-screen">
+            <div className="text-black font-bold rounded-lg border shadow-lg p-10">
+                <h1 className="text-4xl font-bold text-center mb-5 py-2 bg-indigo-600 rounded-md text-white">Konvas JS App</h1>
+                <Stage ref={stageRef} width={width} height={height} style={{
+                    width: width,
+                    height: height,
+                    border: '1px dashed #333'
+                }}>
+                    <Layer>
+                        <ColoredRect/>
+                        <ImageCanvas/>
+                    </Layer>
+                </Stage>
+                <div className="flex justify-center mt-5">
+                    <button className="pointer-events-auto rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500 w-full" onClick={handleExport}>Download</button>
+                </div>
+            </div>
         </div>
     );
 }
