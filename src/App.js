@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useRef} from "react";
+import {Layer, Stage} from "react-konva";
+import ColoredRect from "./components/ColoredRect";
+import ImageCanvas from "./components/ImageCanvas";
+
+const width = 300;
+const height = 400;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const stageRef = useRef(null);
+
+    function downloadCanvas(canvas, filename = 'canvas.png') {
+        const link = document.createElement('a');
+        link.setAttribute('download', filename);
+        link.setAttribute('href', canvas.toDataURL());
+        link.click();
+    }
+
+    const handleExport = () => {
+        // const uri = stageRef.current.toDataURL();
+        // console.log(uri);
+        downloadCanvas(stageRef.current);
+    }
+
+    return (
+        <div>
+            <Stage ref={stageRef} width={width} height={height} style={{
+                width: width,
+                height: height,
+                border: '1px dashed #333'
+            }}>
+                <Layer>
+                    <ColoredRect/>
+                    <ImageCanvas/>
+                </Layer>
+            </Stage>
+            <button onClick={handleExport}>Download</button>
+        </div>
+    );
 }
 
 export default App;
